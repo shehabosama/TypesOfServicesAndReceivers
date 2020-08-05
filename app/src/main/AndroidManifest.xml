@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.android.servicesproject">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <permission android:name="com.android.servicesproject.CUSTOM_PERMISSION" />
+
+    <application
+        android:name=".other.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.AlarmActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.MainActivity2">
+
+        </activity>
+        <activity android:name=".ui.ForegroundJobIntentActivity"></activity>
+        <activity android:name=".ui.ForegroundIntentActivity" />
+        <activity android:name=".ui.ForegroundActivity" />
+        <activity android:name=".ui.PlayMusicActivity" />
+        <activity android:name=".ui.mainactivity.MainActivity" />
+
+        <service android:name=".services.MyBoundServices" />
+        <service android:name=".services.MyMusicService" />
+        <service
+            android:name=".services.ExampleJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service android:name=".services.ExampleService" />
+        <service android:name=".services.ExampleIntentService" />
+        <service
+            android:name=".services.ExampleJobIntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE" /> <!-- <receiver android:name=".services.ExampleBroadcastReceiver"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.BOOT_COMPLETED"/> -->
+        <!-- <action android:name="android.net.conn.CONNECTIVITY_CHANGE" /> -->
+        <!-- <action android:name="android.net.wifi.WIFI_STATE_CHANGED" /> -->
+        <!-- <action android:name="android.net.wifi.STATE_CHANGE" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+
+         <receiver android:name=".receivers.AlarmReceiver"
+         />
+
+
+        <receiver
+            android:name=".services.MyInternetConnectionReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receivers.CustomeBroadCastReceiverExample"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.services.EXAMPLE_ACTION" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receivers.OrderReceiver2"
+            android:permission="android.permission.INTERNET">
+            <intent-filter android:priority="150">
+                <action android:name="com.android.services.EXAMPLE_ACTION" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receivers.OrderReceiver3"
+            android:permission="com.android.servicesproject.CUSTOM_PERMISSION">
+            <intent-filter android:priority="100">
+                <action
+                    android:name="com.android.services.EXAMPLE_ACTION"
+                    android:enabled="true" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>
